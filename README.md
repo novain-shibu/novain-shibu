@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  🏆 National Champion, Techletics 4.0 &nbsp;·&nbsp; 🇮🇳 Samsung Solve for Tomorrow 2026, Top 40 &nbsp;·&nbsp; 📜 2 provisional patents &nbsp;·&nbsp; 📄 IEEE co-author
+  🏆 National Champion, Techletics 4.0 &nbsp;·&nbsp; 🏅 Samsung Solve for Tomorrow 2026, Top 40 &nbsp;·&nbsp; 📜 2 provisional patents &nbsp;·&nbsp; 📄 IEEE co-author
 </p>
 
 ---
