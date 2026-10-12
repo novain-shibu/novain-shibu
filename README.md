@@ -20,12 +20,13 @@
 
 I find code that gets slower (or hungrier for memory) much faster than it should as inputs grow, prove it on real public data, and send a fix with tests. AI agents help me search; **every number below was re-measured by me**, because most claims don't survive verification.
 
-> **1 fix shipped by Hugging Face** &nbsp;·&nbsp; **1 PR merged into uvicorn** (FastAPI's server) &nbsp;·&nbsp; **6 more under review** at Meta (PyTorch, FAISS), Hugging Face, dask and CNCF Jaeger
+> **1 fix shipped by Hugging Face** &nbsp;·&nbsp; **1 PR merged into uvicorn** (FastAPI's server) &nbsp;·&nbsp; **7 more under review** at Apache Airflow, Meta (PyTorch, FAISS), Hugging Face, dask and CNCF Jaeger
 
 | | Project | Result | Status |
 |:-:|---|---|---|
 | ✅ | **Hugging Face Hub**<br><sub>`hf cache prune` / `hf cache rm`</sub> | **79.8 s → 3.3 s**<br><sub>10,000-file cache</sub> | ![shipped](badges/shipped.svg) <br><sub>Fixed in 36 h, crediting my suggested fix · [issue #5100](https://github.com/huggingface/huggingface_hub/issues/5100) · [fix #5118](https://github.com/huggingface/huggingface_hub/pull/5118)</sub> |
 | ✅ | **uvicorn** (FastAPI's server)<br><sub>`--reload` startup</sub> | **120 s → 0.39 s**<br><sub>2,000 directories; users reported 2-min startups</sub> | ![merged](badges/pr-3184.svg) <br><sub>Merged by the maintainer · [PR #3184](https://github.com/Kludex/uvicorn/pull/3184)</sub> |
+| 🌀 | **Apache Airflow**<br><sub>Graph view for large task groups</sub> | **10.3 s → 1.15 s**<br><sub>two task groups of 800 tasks, identical output</sub> | ![open](badges/pr-74574.svg) <br><sub>[PR #74574](https://github.com/apache/airflow/pull/74574)</sub> |
 | ⚡ | **Hugging Face datasets**<br><sub>datasets with many columns</sub> | **15–25 min → ~30 s**<br><sub>real 20,531-column dataset</sub> | ![open](badges/pr-8777.svg) <br><sub>[issue #8776](https://github.com/huggingface/datasets/issues/8776) · [PR #8777](https://github.com/huggingface/datasets/pull/8777)</sub> |
 | 🧠 | **sentence-transformers**<br><sub>IR evaluator memory</sub> | **20.6 GB → 5.5 GB**<br><sub>real NQ data, 32k queries</sub> | ![open](badges/pr-4148.svg) <br><sub>[PR #4148](https://github.com/huggingface/sentence-transformers/pull/4148)</sub> |
 | 🔎 | **FAISS** (Meta)<br><sub>binary k-NN, single query</sub> | **2.0–3.2× faster**<br><sub>2.02× on real binary embeddings</sub> | ![open](badges/pr-5701.svg) <br><sub>Plus a nested-OpenMP correctness fix · [PR #5701](https://github.com/facebookresearch/faiss/pull/5701) · [benchmarks](https://github.com/novain-shibu/faiss-binary-db-parallel)</sub> |
