@@ -16,8 +16,7 @@
 </p>
 
 <p align="center">
-  <sub>AS FEATURED IN</sub><br>
-  <b>The Hindu BusinessLine</b> &nbsp;·&nbsp; <b>Moneycontrol</b> &nbsp;·&nbsp; <b>Malayala Manorama</b> &nbsp;·&nbsp; <b>Mathrubhumi</b> &nbsp;·&nbsp; <b>Samsung Newsroom</b>
+  Featured in <b>The Hindu BusinessLine</b> &nbsp;·&nbsp; <b>Moneycontrol</b> &nbsp;·&nbsp; <b>Malayala Manorama</b> &nbsp;·&nbsp; <b>Mathrubhumi</b> &nbsp;·&nbsp; <b>Samsung Newsroom</b>
 </p>
 
 ---
