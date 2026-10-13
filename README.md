@@ -25,7 +25,7 @@
 
 I find code that gets slower (or hungrier for memory) much faster than it should as inputs grow, or that gives wrong answers where two implementations should agree, prove it, and send a fix with tests. AI agents help me search; **every number below was re-measured by me**, because most claims don't survive verification.
 
-> **1 fix shipped by Hugging Face** &nbsp;·&nbsp; **1 PR merged into uvicorn** (FastAPI's server) &nbsp;·&nbsp; **12 more under review** at uvicorn, Apache Airflow, Celery, marimo, Prefect, ONNX, Meta (PyTorch, FAISS), Hugging Face, dask and CNCF Jaeger
+> **1 fix shipped by Hugging Face** &nbsp;·&nbsp; **1 PR merged into uvicorn** (FastAPI's server) &nbsp;·&nbsp; **11 more under review** at uvicorn, Apache Airflow, marimo, Prefect, ONNX, Meta (PyTorch, FAISS), Hugging Face, dask and CNCF Jaeger
 
 | | Project | Result | Status |
 |:-:|---|---|---|
@@ -33,7 +33,6 @@ I find code that gets slower (or hungrier for memory) much faster than it should
 | ✅ | **uvicorn** (FastAPI's server)<br><sub>`--reload` startup</sub> | **120 s → 0.39 s**<br><sub>2,000 directories; users reported 2-min startups</sub> | ![merged](badges/pr-3184.svg) <br><sub>Merged by the maintainer · [PR #3184](https://github.com/Kludex/uvicorn/pull/3184)</sub> |
 | 🐞 | **uvicorn** (FastAPI's server)<br><sub>new zttp HTTP engine</sub> | **Crash fix**<br><sub>`HEAD` requests with non-ASCII URLs got no response; found by differential fuzzing</sub> | ![open](badges/pr-3201.svg) <br><sub>Bug from the day before, reported with a fix · [PR #3201](https://github.com/Kludex/uvicorn/pull/3201)</sub> |
 | 🌀 | **Apache Airflow**<br><sub>Graph view for large task groups</sub> | **10.3 s → 1.15 s**<br><sub>two task groups of 800 tasks, identical output</sub> | ![open](badges/pr-74574.svg) <br><sub>[PR #74574](https://github.com/apache/airflow/pull/74574)</sub> |
-| 🔗 | **Celery**<br><sub>building long task chains</sub> | **54.3 s → 0.024 s**<br><sub>4,000-task chain, ~2,000× faster</sub> | ![open](badges/pr-10850.svg) <br><sub>[PR #10850](https://github.com/celery/celery/pull/10850)</sub> |
 | 📓 | **marimo** (Python notebooks)<br><sub>re-running a cell in large notebooks</sub> | **243 ms → 20 ms**<br><sub>1,000-cell notebook, every run and UI interaction; 19× at 2,000 cells</sub> | ![open](badges/pr-11196.svg) <br><sub>[PR #11196](https://github.com/marimo-team/marimo/pull/11196)</sub> |
 | 🔐 | **Prefect** (workflow orchestration)<br><sub>saving blocks that hold a list of credentials</sub> | **Silent data-corruption fix**<br><sub>18 of 20 saved entries came back wrong; 0 after the fix</sub> | ![open](badges/pr-23404.svg) <br><sub>Reported with a fix and tests · [issue #23403](https://github.com/PrefectHQ/prefect/issues/23403) · [PR #23404](https://github.com/PrefectHQ/prefect/pull/23404)</sub> |
 | 🧮 | **ONNX** (Linux Foundation AI)<br><sub>reference evaluator, `ReduceSumSquare`</sub> | **Correctness fix**<br><sub>32-bit integer input came back as 64-bit, against the spec; found by differential fuzzing</sub> | ![open](badges/pr-8600.svg) <br><sub>Fix with tests · [PR #8600](https://github.com/onnx/onnx/pull/8600)</sub> |
