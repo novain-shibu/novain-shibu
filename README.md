@@ -78,7 +78,14 @@ In 2018 I watched floodwater swallow the roads around Chalakudy. Eight years lat
 
 - Built the prototype myself: sensors, Raspberry Pi and Arduino edge nodes, radio encoding, Python
 - Demonstrated at **Peechi Dam** to the KERI Director, Joint Director and Irrigation Department officials
-- Co-inventor, provisional patent for a **dam cascade management system** (with Idukki engineering college)
+
+---
+
+## 🏞️ Dam management project
+
+Working with **Government Engineering College Idukki** on a system for managing a cascade of dams (several dams on the same river system).
+
+- Co-inventor, provisional patent for the **dam cascade management system**
 
 ---
 
