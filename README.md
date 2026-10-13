@@ -11,8 +11,9 @@
 </p>
 
 <p align="center">
-  🏆 National Champion, Techletics 4.0 &nbsp;·&nbsp; 🏅 Samsung Solve for Tomorrow 2026, Top 40 &nbsp;·&nbsp; 📜 2 provisional patents &nbsp;·&nbsp; 📄 IEEE co-author<br>
-  📰 <b>National media:</b> Moneycontrol &nbsp;·&nbsp; The Hindu BusinessLine &nbsp;·&nbsp; Analytics India Magazine &nbsp;·&nbsp; Mathrubhumi &nbsp;·&nbsp; Manorama &nbsp;·&nbsp; Samsung Newsroom
+  🏆 National Champion, Techletics 4.0 &nbsp;·&nbsp; 🏅 Samsung Solve for Tomorrow 2026, Top 40<br>
+  📜 2 provisional patents &nbsp;·&nbsp; 📄 IEEE co-author<br>
+  📰 Featured in <b>Moneycontrol</b>, <b>The Hindu BusinessLine</b>, <b>Mathrubhumi</b>, <b>Manorama</b> &amp; more
 </p>
 
 ---
