@@ -25,7 +25,7 @@
 
 I find code that gets slower (or hungrier for memory) much faster than it should as inputs grow, or that gives wrong answers where two implementations should agree, prove it, and send a fix with tests. AI agents help me search; **every number below was re-measured by me**, because most claims don't survive verification.
 
-> **1 fix shipped by Hugging Face** &nbsp;·&nbsp; **1 PR merged into uvicorn** (FastAPI's server) &nbsp;·&nbsp; **11 more under review** at uvicorn, Apache Airflow, marimo, Prefect, ONNX, Meta (PyTorch, FAISS), Hugging Face, dask and CNCF Jaeger
+> **1 fix shipped by Hugging Face** &nbsp;·&nbsp; **1 PR merged into uvicorn** (FastAPI's server) &nbsp;·&nbsp; **12 more under review** at uvicorn, Apache Airflow, marimo, Prefect, ONNX, xarray, Meta (PyTorch, FAISS), Hugging Face, dask and CNCF Jaeger
 
 | | Project | Result | Status |
 |:-:|---|---|---|
@@ -36,6 +36,7 @@ I find code that gets slower (or hungrier for memory) much faster than it should
 | 📓 | **marimo** (Python notebooks)<br><sub>re-running a cell in large notebooks</sub> | **243 ms → 20 ms**<br><sub>1,000-cell notebook, every run and UI interaction; 19× at 2,000 cells</sub> | ![open](badges/pr-11196.svg) <br><sub>[PR #11196](https://github.com/marimo-team/marimo/pull/11196)</sub> |
 | 🔐 | **Prefect** (workflow orchestration)<br><sub>saving blocks that hold a list of credentials</sub> | **Silent data-corruption fix**<br><sub>18 of 20 saved entries came back wrong; 0 after the fix</sub> | ![open](badges/pr-23404.svg) <br><sub>Reported with a fix and tests · [issue #23403](https://github.com/PrefectHQ/prefect/issues/23403) · [PR #23404](https://github.com/PrefectHQ/prefect/pull/23404)</sub> |
 | 🧮 | **ONNX** (Linux Foundation AI)<br><sub>reference evaluator, `ReduceSumSquare`</sub> | **Correctness fix**<br><sub>32-bit integer input came back as 64-bit, against the spec; found by differential fuzzing</sub> | ![open](badges/pr-8600.svg) <br><sub>Fix with tests · [PR #8600](https://github.com/onnx/onnx/pull/8600)</sub> |
+| 🔤 | **xarray** (NumFOCUS)<br><sub>`.str` methods on text from pandas</sub> | **Crash fix**<br><sub>10 string methods (`split`, `pad`, `format`...) crashed on object-dtype text, e.g. after `DataFrame.to_xarray()`; found by differential fuzzing</sub> | ![open](badges/pr-11722.svg) <br><sub>Fix with 10 tests · [PR #11722](https://github.com/pydata/xarray/pull/11722)</sub> |
 | ⚡ | **Hugging Face datasets**<br><sub>datasets with many columns</sub> | **15–25 min → ~30 s**<br><sub>real 20,531-column dataset</sub> | ![open](badges/pr-8777.svg) <br><sub>[issue #8776](https://github.com/huggingface/datasets/issues/8776) · [PR #8777](https://github.com/huggingface/datasets/pull/8777)</sub> |
 | 🧠 | **sentence-transformers**<br><sub>IR evaluator memory</sub> | **20.6 GB → 5.5 GB**<br><sub>real NQ data, 32k queries</sub> | ![open](badges/pr-4148.svg) <br><sub>[PR #4148](https://github.com/huggingface/sentence-transformers/pull/4148)</sub> |
 | 🔎 | **FAISS** (Meta)<br><sub>binary k-NN, single query</sub> | **2.0–3.2× faster**<br><sub>2.02× on real binary embeddings</sub> | ![open](badges/pr-5701.svg) <br><sub>Plus a nested-OpenMP correctness fix · [PR #5701](https://github.com/facebookresearch/faiss/pull/5701) · [benchmarks](https://github.com/novain-shibu/faiss-binary-db-parallel)</sub> |
