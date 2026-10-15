@@ -12,12 +12,37 @@
 
 <p align="center">
   🏆 National Champion, Techletics 4.0 &nbsp;·&nbsp; 🏅 Samsung Solve for Tomorrow 2026, Top 40<br>
-  📜 2 provisional patents &nbsp;·&nbsp; 📄 IEEE co-author
+  📜 2 provisional patents &nbsp;·&nbsp; 📄 IEEE co-author<br>
+  🧪 Published research with a DOI: <a href="https://doi.org/10.5281/zenodo.23393220"><b>speculative decoding for AI code editors</b></a>
 </p>
 
 <p align="center">
   Featured in <b>The Hindu BusinessLine</b> &nbsp;·&nbsp; <b>Moneycontrol</b> &nbsp;·&nbsp; <b>Malayala Manorama</b> &nbsp;·&nbsp; <b>Mathrubhumi</b> &nbsp;·&nbsp; <b>Samsung Newsroom</b>
 </p>
+
+---
+
+## 🧪 Research
+
+### Resync-and-Anchor Copy Drafting for Lossless Code Fast-Apply &nbsp;[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23393220.svg)](https://doi.org/10.5281/zenodo.23393220)
+
+AI code editors apply an edit by having a model rewrite the whole file, most of it copied. I built a lossless
+"copy-guesser" that lets the model confirm long copied spans in one pass, and compared it with Snowflake's
+SuffixDecoding, the strongest open method (built into vLLM).
+
+- **1.29× fewer model passes** than SuffixDecoding on edits never used for tuning (95% CI 1.22–1.37), output identical to normal decoding
+- **24–37× faster than normal decoding** on a free T4 GPU; against SuffixDecoding the wall-clock was a tie on that GPU, and the report explains why
+- A laptop simulator that predicted the GPU pass counts **exactly** in three runs, plus 7 ideas that failed, with numbers
+
+[Report (PDF)](https://github.com/novain-shibu/resync-apply/releases/download/v1.0.0/REPORT.pdf) · [Code](https://github.com/novain-shibu/resync-apply) · Apache-2.0
+
+### Prompt-injection defenses for AI agents
+
+[**prompt-injection-relocation**](https://github.com/novain-shibu/prompt-injection-relocation): a stress test that moves logged prompt-injection attacks into other channels an agent reads (email, files, calendar, web).
+
+- A defense gate that stopped **88%** of attacks where they were originally placed dropped to **28–62%** in 10 of 16 channel types
+- A redesigned gate held **91–100%** in 14 of 16 (weak spot: delegated sources)
+- Offline replay, reproducible in about 5 minutes
 
 ---
 
@@ -62,16 +87,6 @@ I find code that gets slower (or hungrier for memory) much faster than it should
 
 One agent once told me it had found a 700× speedup "with 100% confidence". The real number was 59–310×, and my own test harness was wrong twice before I trusted it.
 </details>
-
----
-
-## 🛡️ Research: prompt-injection defenses for AI agents
-
-[**prompt-injection-relocation**](https://github.com/novain-shibu/prompt-injection-relocation): a stress test that moves logged prompt-injection attacks into other channels an agent reads (email, files, calendar, web).
-
-- A defense gate that stopped **88%** of attacks where they were originally placed dropped to **28–62%** in 10 of 16 channel types
-- A redesigned gate held **91–100%** in 14 of 16 (weak spot: delegated sources)
-- Offline replay, reproducible in about 5 minutes
 
 ---
 
