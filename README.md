@@ -13,7 +13,7 @@
 <p align="center">
   🏆 National Champion, Techletics 4.0 &nbsp;·&nbsp; 🏅 Samsung Solve for Tomorrow 2026, Top 40<br>
   📜 2 provisional patents &nbsp;·&nbsp; 📄 IEEE co-author<br>
-  🧪 Published research with DOIs: <a href="https://doi.org/10.5281/zenodo.23393220"><b>speculative decoding for AI code editors</b></a> &nbsp;·&nbsp; <a href="https://doi.org/10.5281/zenodo.23413796"><b>predicting speculative-decoding gains on real engines</b></a>
+  🧪 <a href="#research"><b>3 published research notes with DOIs</b></a>
 </p>
 
 <p align="center">
@@ -22,40 +22,15 @@
 
 ---
 
+<a name="research"></a>
 ## 🧪 Research
 
-### Resync-and-Anchor Copy Drafting for Lossless Code Fast-Apply &nbsp;[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23393220.svg)](https://doi.org/10.5281/zenodo.23393220)
-
-AI code editors apply an edit by having a model rewrite the whole file, most of it copied. I built a lossless
-"copy-guesser" that lets the model confirm long copied spans in one pass, and compared it with Snowflake's
-SuffixDecoding, the strongest open method (built into vLLM).
-
-- **1.29× fewer model passes** than SuffixDecoding on edits never used for tuning (95% CI 1.22–1.37), output identical to normal decoding
-- **24–37× faster than normal decoding** on a free T4 GPU; against SuffixDecoding the wall-clock was a tie on that GPU, and the report explains why
-- A laptop simulator that predicted the GPU pass counts **exactly** in three runs, plus 7 ideas that failed, with numbers
-
-[Report (PDF)](https://github.com/novain-shibu/resync-apply/releases/download/v1.0.0/REPORT.pdf) · [Code](https://github.com/novain-shibu/resync-apply) · Apache-2.0
-
-### spectrace: predicting speculative-decoding gains without running the drafter &nbsp;[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23413796.svg)](https://doi.org/10.5281/zenodo.23413796)
-
-Speculative decoding speeds up a large model by letting a small "drafter" guess ahead; choosing the right drafter usually
-means running each one. I tested an offline way to predict a drafter's gain from outputs the model has already produced
-(the estimator was published first by Zhao & Cai, arXiv:2610.10411; I derived it independently and credit them), checked it
-against real engines, and applied it to choosing drafters during RL training.
-
-- Predictions matched real engines: **27.36 vs 27.28** passes (Hugging Face, sampling); **931 = 931** (greedy); the engine's own probabilities matched within **0.02–0.31%**
-- Picked the best of 3 drafters correctly for 2 models, within **0.2–1.2%**, about **140× cheaper** than measuring (measured 144×); held up across a real RL-trained model
-- An exact replay check for vLLM's speculative-decoding counters independently caught two known metric bugs, one of them ~10× off
-
-[Report](https://github.com/novain-shibu/spectrace/blob/main/REPORT.md) · [Code](https://github.com/novain-shibu/spectrace) · Apache-2.0
-
-### Prompt-injection defenses for AI agents
-
-[**prompt-injection-relocation**](https://github.com/novain-shibu/prompt-injection-relocation): a stress test that moves logged prompt-injection attacks into other channels an agent reads (email, files, calendar, web).
-
-- A defense gate that stopped **88%** of attacks where they were originally placed dropped to **28–62%** in 10 of 16 channel types
-- A redesigned gate held **91–100%** in 14 of 16 (weak spot: delegated sources)
-- Offline replay, reproducible in about 5 minutes
+| Project | What it is | Key result | |
+|---|---|---|---|
+| **Unshape** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23418945.svg)](https://doi.org/10.5281/zenodo.23418945) | Malayalam text from PDFs by reversing font shaping | 99% exact words vs 93% for free OCR (when the font version is known) | [details ↓](#unshape) |
+| **spectrace** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23413796.svg)](https://doi.org/10.5281/zenodo.23413796) | Predicting speculative-decoding gains without running the drafter | Matched real engines within 0.02–0.31% | [details ↓](#spectrace) |
+| **resync-apply** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23393220.svg)](https://doi.org/10.5281/zenodo.23393220) | Lossless copy drafting for AI code editors | 1.29× fewer model passes than Snowflake's SuffixDecoding | [details ↓](#resync-apply) |
+| **prompt-injection-relocation** | Stress test for AI-agent prompt-injection defenses | A gate that stopped 88% of attacks dropped to 28–62% when attacks moved channel | [details ↓](#prompt-injection) |
 
 ---
 
@@ -132,6 +107,59 @@ Working with **Government Engineering College Idukki** on a system for managing 
 | 📜 | **2 provisional patents** |
 | 📄 | **Co-author, IEEE paper** (accepted, publication forthcoming) |
 | 📰 | Featured in **Moneycontrol, The Hindu BusinessLine, EdexLive, Mathrubhumi, Manorama, Analytics India Magazine, Samsung Newsroom** and more |
+
+---
+
+## 🧪 Research details
+
+<a name="unshape"></a>
+### Unshape: Malayalam text from PDFs by reversing font shaping &nbsp;[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23418945.svg)](https://doi.org/10.5281/zenodo.23418945)
+
+Copying Malayalam text out of a PDF often gives garbled words, because the file stores shaped glyphs, not letters. I recover
+the text by identifying the exact font version and searching for the text whose font shaping reproduces the PDF's glyphs,
+keeping a word only if it re-renders exactly.
+
+- On PDFs with known text: **99.1–99.5% exact words**, vs 92.9–93.9% for free OCR (Tesseract) and 34–81% for PyMuPDF
+- On 10 public Kerala Gazette PDFs: **94.8%** of Malayalam words re-render exactly; PyMuPDF's output contained 25–43% of them
+- Honest limit: it needs the exact font version; on an unseen publisher it recovered 0%, and free OCR is already strong
+
+[Report](https://github.com/novain-shibu/unshape/blob/main/REPORT.md) · [Code](https://github.com/novain-shibu/unshape) · Apache-2.0
+
+<a name="resync-apply"></a>
+### Resync-and-Anchor Copy Drafting for Lossless Code Fast-Apply &nbsp;[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23393220.svg)](https://doi.org/10.5281/zenodo.23393220)
+
+AI code editors apply an edit by having a model rewrite the whole file, most of it copied. I built a lossless
+"copy-guesser" that lets the model confirm long copied spans in one pass, and compared it with Snowflake's
+SuffixDecoding, the strongest open method (built into vLLM).
+
+- **1.29× fewer model passes** than SuffixDecoding on edits never used for tuning (95% CI 1.22–1.37), output identical to normal decoding
+- **24–37× faster than normal decoding** on a free T4 GPU; against SuffixDecoding the wall-clock was a tie on that GPU, and the report explains why
+- A laptop simulator that predicted the GPU pass counts **exactly** in three runs, plus 7 ideas that failed, with numbers
+
+[Report (PDF)](https://github.com/novain-shibu/resync-apply/releases/download/v1.0.0/REPORT.pdf) · [Code](https://github.com/novain-shibu/resync-apply) · Apache-2.0
+
+<a name="spectrace"></a>
+### spectrace: predicting speculative-decoding gains without running the drafter &nbsp;[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23413796.svg)](https://doi.org/10.5281/zenodo.23413796)
+
+Speculative decoding speeds up a large model by letting a small "drafter" guess ahead; choosing the right drafter usually
+means running each one. I tested an offline way to predict a drafter's gain from outputs the model has already produced
+(the estimator was published first by Zhao & Cai, arXiv:2610.10411; I derived it independently and credit them), checked it
+against real engines, and applied it to choosing drafters during RL training.
+
+- Predictions matched real engines: **27.36 vs 27.28** passes (Hugging Face, sampling); **931 = 931** (greedy); the engine's own probabilities matched within **0.02–0.31%**
+- Picked the best of 3 drafters correctly for 2 models, within **0.2–1.2%**, about **140× cheaper** than measuring (measured 144×); held up across a real RL-trained model
+- An exact replay check for vLLM's speculative-decoding counters independently caught two known metric bugs, one of them ~10× off
+
+[Report](https://github.com/novain-shibu/spectrace/blob/main/REPORT.md) · [Code](https://github.com/novain-shibu/spectrace) · Apache-2.0
+
+<a name="prompt-injection"></a>
+### Prompt-injection defenses for AI agents
+
+[**prompt-injection-relocation**](https://github.com/novain-shibu/prompt-injection-relocation): a stress test that moves logged prompt-injection attacks into other channels an agent reads (email, files, calendar, web).
+
+- A defense gate that stopped **88%** of attacks where they were originally placed dropped to **28–62%** in 10 of 16 channel types
+- A redesigned gate held **91–100%** in 14 of 16 (weak spot: delegated sources)
+- Offline replay, reproducible in about 5 minutes
 
 ---
 
