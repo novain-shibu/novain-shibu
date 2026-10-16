@@ -13,7 +13,7 @@
 <p align="center">
   🏆 National Champion, Techletics 4.0 &nbsp;·&nbsp; 🏅 Samsung Solve for Tomorrow 2026, Top 40<br>
   📜 2 provisional patents &nbsp;·&nbsp; 📄 IEEE co-author<br>
-  🧪 Published research with a DOI: <a href="https://doi.org/10.5281/zenodo.23393220"><b>speculative decoding for AI code editors</b></a>
+  🧪 Published research with DOIs: <a href="https://doi.org/10.5281/zenodo.23393220"><b>speculative decoding for AI code editors</b></a> &nbsp;·&nbsp; <a href="https://doi.org/10.5281/zenodo.23413796"><b>predicting speculative-decoding gains on real engines</b></a>
 </p>
 
 <p align="center">
@@ -35,6 +35,19 @@ SuffixDecoding, the strongest open method (built into vLLM).
 - A laptop simulator that predicted the GPU pass counts **exactly** in three runs, plus 7 ideas that failed, with numbers
 
 [Report (PDF)](https://github.com/novain-shibu/resync-apply/releases/download/v1.0.0/REPORT.pdf) · [Code](https://github.com/novain-shibu/resync-apply) · Apache-2.0
+
+### spectrace: predicting speculative-decoding gains without running the drafter &nbsp;[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23413796.svg)](https://doi.org/10.5281/zenodo.23413796)
+
+Speculative decoding speeds up a large model by letting a small "drafter" guess ahead; choosing the right drafter usually
+means running each one. I tested an offline way to predict a drafter's gain from outputs the model has already produced
+(the estimator was published first by Zhao & Cai, arXiv:2610.10411; I derived it independently and credit them), checked it
+against real engines, and applied it to choosing drafters during RL training.
+
+- Predictions matched real engines: **27.36 vs 27.28** passes (Hugging Face, sampling); **931 = 931** (greedy); the engine's own probabilities matched within **0.02–0.31%**
+- Picked the best of 3 drafters correctly for 2 models, within **0.2–1.2%**, about **140× cheaper** than measuring (measured 144×); held up across a real RL-trained model
+- An exact replay check for vLLM's speculative-decoding counters independently caught two known metric bugs, one of them ~10× off
+
+[Report](https://github.com/novain-shibu/spectrace/blob/main/REPORT.md) · [Code](https://github.com/novain-shibu/spectrace) · Apache-2.0
 
 ### Prompt-injection defenses for AI agents
 
