@@ -13,7 +13,7 @@
 <p align="center">
   🏆 National Champion, Techletics 4.0 &nbsp;·&nbsp; 🏅 Samsung Solve for Tomorrow 2026, Top 40<br>
   📜 2 provisional patents &nbsp;·&nbsp; 📄 IEEE co-author<br>
-  🧪 <a href="#research"><b>3 published research notes with DOIs</b></a>
+  🧪 <a href="#research"><b>4 published research notes with DOIs</b></a>
 </p>
 
 <p align="center">
@@ -27,6 +27,7 @@
 
 | Project | What it is | Key result | |
 |---|---|---|---|
+| **FinePDFs audit** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23432200.svg)](https://doi.org/10.5281/zenodo.23432200) | Audit of Hugging Face's FinePDFs AI training dataset in Indian scripts | AI OCR invented the text in 20/20 Malayalam, 18/18 Telugu and 18/18 Kannada documents sampled; recovery without OCR: 99% exact words | [details ↓](#finepdfs-audit) |
 | **Unshape** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23418945.svg)](https://doi.org/10.5281/zenodo.23418945) | Malayalam text from PDFs by reversing font shaping | 99% exact words vs 93% for free OCR (when the font version is known) | [details ↓](#unshape) |
 | **spectrace** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23413796.svg)](https://doi.org/10.5281/zenodo.23413796) | Predicting speculative-decoding gains without running the drafter | Matched real engines within 0.02–0.31% | [details ↓](#spectrace) |
 | **resync-apply** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23393220.svg)](https://doi.org/10.5281/zenodo.23393220) | Lossless copy drafting for AI code editors | 1.29× fewer model passes than Snowflake's SuffixDecoding | [details ↓](#resync-apply) |
@@ -112,6 +113,23 @@ Working with **Government Engineering College Idukki** on a system for managing 
 ---
 
 ## 🧪 Research details
+
+<a name="finepdfs-audit"></a>
+### FinePDFs audit: corrupted and fabricated Indian-language text in an AI training dataset &nbsp;[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23432200.svg)](https://doi.org/10.5281/zenodo.23432200)
+
+FinePDFs (Hugging Face) is a 3-trillion-token dataset of text extracted from PDFs, used to train AI models. I audited its
+complex-script languages and traced every problem back to the original PDFs.
+
+- **Fabricated text:** for Tamil, Malayalam, Telugu and Kannada most documents went through an AI OCR model; its stored text
+  almost never matched an independent OCR of the same PDF (Malayalam 20/20, Telugu 18/18, Kannada 18/18, Tamil 7/8;
+  Hindi 0/19 and Bengali 0/23 as controls). Checked by hand: a ministry pension scheme became "a platform for farmers in
+  Kerala"; no signal in the dataset flags it
+- **Corrupted text:** 3-29% impossible words on the text-layer path in 16 scripts; mostly caused by Microsoft Word's PDF
+  export, which keeps only 7-65% of words readable even with Microsoft's own font
+- **Recovery without OCR:** reversing font shaping recovered **99.1%** of words on held-out PDFs in 10 scripts, vs 86-91%
+  for free OCR and 61% for the AI OCR the dataset used, at 14 ms per page on a laptop
+
+[Report](https://github.com/novain-shibu/finepdfs-audit/blob/main/REPORT.md) · [Code & results](https://github.com/novain-shibu/finepdfs-audit) · report CC BY 4.0, code Apache-2.0
 
 <a name="unshape"></a>
 ### Unshape: Malayalam text from PDFs by reversing font shaping &nbsp;[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23418945.svg)](https://doi.org/10.5281/zenodo.23418945)
