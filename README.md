@@ -27,7 +27,7 @@
 
 | Project | What it is | Key result | |
 |---|---|---|---|
-| **FinePDFs audit** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23432200.svg)](https://doi.org/10.5281/zenodo.23432200) | Audit of Hugging Face's FinePDFs AI training dataset, traced back to the PDFs | ~11B tokens of bad text (AI OCR invented ~4.8B in 7 Indian and Sri Lankan scripts; ~6B broken Persian filed under small languages); 94% of 791 sampled Indian government regional-language PDFs have no correct text (scans or garbled); Microsoft Word's Save as PDF garbles ~15 scripts (same text and font: Edge loses no letters, Word loses/garbles many: letter F1 97-99.5% vs 34-90%); recovery without OCR: 99% exact words | [details ↓](#finepdfs-audit) |
+| **FinePDFs audit** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23432200.svg)](https://doi.org/10.5281/zenodo.23432200) | Audit of Hugging Face's FinePDFs AI training dataset, traced back to the PDFs | ~11B tokens of bad text, rough extrapolation (AI OCR invented ~4.8B in 7 Indian and Sri Lankan scripts; ~6B broken Persian filed under small languages); 94% of 791 sampled Indian government regional-language PDFs have no correct text (scans or garbled); in a controlled test, Word 365's Save as PDF garbled ~15 scripts (same text and font: Edge loses no letters, Word loses/garbles many: letter F1 97-99.5% vs 34-90%); recovery without OCR: 99% exact words | [details ↓](#finepdfs-audit) |
 | **Unshape** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23418945.svg)](https://doi.org/10.5281/zenodo.23418945) | Malayalam text from PDFs by reversing font shaping | 99% exact words vs 93% for free OCR (when the font version is known) | [details ↓](#unshape) |
 | **spectrace** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23413796.svg)](https://doi.org/10.5281/zenodo.23413796) | Predicting speculative-decoding gains without running the drafter | Matched real engines within 0.02–0.31% | [details ↓](#spectrace) |
 | **resync-apply** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23393220.svg)](https://doi.org/10.5281/zenodo.23393220) | Lossless copy drafting for AI code editors | 1.29× fewer model passes than Snowflake's SuffixDecoding | [details ↓](#resync-apply) |
@@ -124,12 +124,12 @@ complex-script languages and traced every problem back to the original PDFs.
   matched an independent OCR of the same PDF in 7 scripts (Malayalam 18/18, Telugu 17/17, Kannada 17/17, Tamil 6/7,
   Sinhala 15/15, Odia 19/19, Punjabi 14/16), while Hindi, Bengali, Marathi, Nepali and Gujarati were fine. Checked by
   hand: a ministry pension scheme became "a platform for farmers in Kerala"; roughly 4.8 billion tokens if the sampled
-  rates hold, and no signal in the dataset flags it
+  rates hold (rough extrapolation), and no signal in the dataset flags it
 - **Small languages get the garbage:** the Southern Balochi (99%), Kashmiri (94%), Gilaki (73%) and Mesopotamian Arabic (69%)
-  configs are mostly broken Persian or standard Arabic text, about 6.1 billion tokens; big languages stay clean
+  configs are mostly broken Persian or standard Arabic text, about 6.1 billion tokens (rough); big languages stay clean
 - **Government PDFs:** 93.8% of 791 randomly sampled Indian government (gov.in / nic.in) PDFs in nine regional languages
-  have no correct text (73% scans that a screen reader can read only after OCR, 21% garbled Word exports, 6% clean),
-  verified on the original PDFs; no improvement, likely worse in recent years (91% -> 97.5%)
+  have no correct text (73% had no usable text layer, mostly scans; 21% garbled text layers, mostly Word-made in a checked subset;
+  6% clean), checked on 29 originals; no improvement between 2017-19 and 2023-25. A sample of what Common Crawl and FinePDFs kept
 - **A cause, a Word bug:** with the same text and the same font, Microsoft Edge's PDF loses no letters (a few doubled vowel signs) while Word 365's
   Save as PDF loses and garbles many (letter F1 34-90%: Khmer, Myanmar, Malayalam, Hindi); Word's export keeps 7-65% of words readable in 10 Indian
   scripts and also garbles Divehi and Lao (about 15 scripts, over a billion speakers), while Arabic, Hebrew and Thai survive
