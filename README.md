@@ -115,7 +115,7 @@ Working with **Government Engineering College Idukki** on a system for managing 
 ## 🧪 Research details
 
 <a name="finepdfs-audit"></a>
-### FinePDFs audit: invented and broken text in an AI training dataset, unreadable government PDFs, and a Word bug &nbsp;[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23432200.svg)](https://doi.org/10.5281/zenodo.23432200)
+### FinePDFs audit: invented and broken text in an AI training dataset, government PDFs without correct text, and Word's PDF export &nbsp;[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23432200.svg)](https://doi.org/10.5281/zenodo.23432200)
 
 FinePDFs (Hugging Face) is a 3-trillion-token dataset of text extracted from PDFs, used to train AI models. I audited its
 complex-script languages and traced every problem back to the original PDFs.
