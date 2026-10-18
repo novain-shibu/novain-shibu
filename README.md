@@ -27,7 +27,7 @@
 
 | Project | What it is | Key result | |
 |---|---|---|---|
-| **FinePDFs audit** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23432200.svg)](https://doi.org/10.5281/zenodo.23432200) | Audit of Hugging Face's FinePDFs AI training dataset, traced back to the PDFs | ~11B tokens of bad text (AI OCR invented ~4.8B in 7 Indian and Sri Lankan scripts; ~6B broken Persian filed under small languages); 94% of 791 sampled Indian government regional-language PDFs have no correct text (scans or garbled); Microsoft Word's Save as PDF garbles ~15 scripts (same text and font: Edge keeps 100% of letters, Word 36-88%); recovery without OCR: 99% exact words | [details ↓](#finepdfs-audit) |
+| **FinePDFs audit** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23432200.svg)](https://doi.org/10.5281/zenodo.23432200) | Audit of Hugging Face's FinePDFs AI training dataset, traced back to the PDFs | ~11B tokens of bad text (AI OCR invented ~4.8B in 7 Indian and Sri Lankan scripts; ~6B broken Persian filed under small languages); 94% of 791 sampled Indian government regional-language PDFs have no correct text (scans or garbled); Microsoft Word's Save as PDF garbles ~15 scripts (same text and font: Edge loses no letters, Word loses/garbles many: letter F1 97-99.5% vs 34-90%); recovery without OCR: 99% exact words | [details ↓](#finepdfs-audit) |
 | **Unshape** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23418945.svg)](https://doi.org/10.5281/zenodo.23418945) | Malayalam text from PDFs by reversing font shaping | 99% exact words vs 93% for free OCR (when the font version is known) | [details ↓](#unshape) |
 | **spectrace** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23413796.svg)](https://doi.org/10.5281/zenodo.23413796) | Predicting speculative-decoding gains without running the drafter | Matched real engines within 0.02–0.31% | [details ↓](#spectrace) |
 | **resync-apply** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23393220.svg)](https://doi.org/10.5281/zenodo.23393220) | Lossless copy drafting for AI code editors | 1.29× fewer model passes than Snowflake's SuffixDecoding | [details ↓](#resync-apply) |
@@ -130,8 +130,8 @@ complex-script languages and traced every problem back to the original PDFs.
 - **Government PDFs:** 93.8% of 791 randomly sampled Indian government (gov.in / nic.in) PDFs in nine regional languages
   have no correct text (73% scans that a screen reader can read only after OCR, 21% garbled Word exports, 6% clean),
   verified on the original PDFs; no improvement, likely worse in recent years (91% -> 97.5%)
-- **A cause, a Word bug:** with the same text and the same font, Microsoft Edge's PDF keeps 100% of the letters but Word 365's
-  Save as PDF keeps only 36-88% (Khmer, Malayalam, Hindi, Myanmar); Word's export keeps 7-65% of words readable in 10 Indian
+- **A cause, a Word bug:** with the same text and the same font, Microsoft Edge's PDF loses no letters (a few doubled vowel signs) while Word 365's
+  Save as PDF loses and garbles many (letter F1 34-90%: Khmer, Myanmar, Malayalam, Hindi); Word's export keeps 7-65% of words readable in 10 Indian
   scripts and also garbles Divehi and Lao (about 15 scripts, over a billion speakers), while Arabic, Hebrew and Thai survive
 - **Recovery without OCR:** reversing font shaping recovered **99.1%** of words on held-out PDFs in 10 scripts, vs 86-91%
   for free OCR and 61% for the AI OCR the dataset used, at 14 ms per page on a laptop
