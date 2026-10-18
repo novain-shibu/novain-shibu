@@ -27,7 +27,7 @@
 
 | Project | What it is | Key result | |
 |---|---|---|---|
-| **FinePDFs audit** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23432200.svg)](https://doi.org/10.5281/zenodo.23432200) | Audit of Hugging Face's FinePDFs AI training dataset in Indian scripts | AI OCR invented the stored text in 7 Indian and Sri Lankan scripts (e.g. Malayalam 18/18, Odia 19/19 documents sampled; ~4.8B tokens if rates hold); recovery without OCR: 99% exact words | [details ↓](#finepdfs-audit) |
+| **FinePDFs audit** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23432200.svg)](https://doi.org/10.5281/zenodo.23432200) | Audit of Hugging Face's FinePDFs AI training dataset, traced back to the PDFs | ~11B tokens of bad text (AI OCR invented ~4.8B in 7 Indian and Sri Lankan scripts; ~6B broken Persian filed under small languages); 94% of 791 sampled Indian government regional-language PDFs unreadable by screen readers/AI; Microsoft Word's Save as PDF garbles ~15 scripts; recovery without OCR: 99% exact words | [details ↓](#finepdfs-audit) |
 | **Unshape** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23418945.svg)](https://doi.org/10.5281/zenodo.23418945) | Malayalam text from PDFs by reversing font shaping | 99% exact words vs 93% for free OCR (when the font version is known) | [details ↓](#unshape) |
 | **spectrace** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23413796.svg)](https://doi.org/10.5281/zenodo.23413796) | Predicting speculative-decoding gains without running the drafter | Matched real engines within 0.02–0.31% | [details ↓](#spectrace) |
 | **resync-apply** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23393220.svg)](https://doi.org/10.5281/zenodo.23393220) | Lossless copy drafting for AI code editors | 1.29× fewer model passes than Snowflake's SuffixDecoding | [details ↓](#resync-apply) |
@@ -115,7 +115,7 @@ Working with **Government Engineering College Idukki** on a system for managing 
 ## 🧪 Research details
 
 <a name="finepdfs-audit"></a>
-### FinePDFs audit: corrupted and fabricated Indian-language text in an AI training dataset &nbsp;[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23432200.svg)](https://doi.org/10.5281/zenodo.23432200)
+### FinePDFs audit: invented and broken text in an AI training dataset, unreadable government PDFs, and a Word bug &nbsp;[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23432200.svg)](https://doi.org/10.5281/zenodo.23432200)
 
 FinePDFs (Hugging Face) is a 3-trillion-token dataset of text extracted from PDFs, used to train AI models. I audited its
 complex-script languages and traced every problem back to the original PDFs.
@@ -125,12 +125,18 @@ complex-script languages and traced every problem back to the original PDFs.
   Sinhala 15/15, Odia 19/19, Punjabi 14/16), while Hindi, Bengali, Marathi, Nepali and Gujarati were fine. Checked by
   hand: a ministry pension scheme became "a platform for farmers in Kerala"; roughly 4.8 billion tokens if the sampled
   rates hold, and no signal in the dataset flags it
-- **Corrupted text:** 3-29% impossible words on the text-layer path in 16 scripts; mostly caused by Microsoft Word's PDF
-  export, which keeps only 7-65% of words readable even with Microsoft's own font
+- **Small languages get the garbage:** the Southern Balochi (99%), Kashmiri (94%), Gilaki (73%) and Mesopotamian Arabic (69%)
+  configs are mostly broken Persian or standard Arabic text, about 6.1 billion tokens; big languages stay clean
+- **Government PDFs:** 93.8% of 791 randomly sampled Indian government (gov.in / nic.in) PDFs in nine regional languages
+  have no correct text for screen readers, search or AI (73% scans, 21% broken Word exports, 6% clean), verified on the
+  original PDFs and worse in recent years (91% -> 97.5%)
+- **Root cause, a Word bug:** Microsoft Word made 79% of the broken Indian-language PDFs (every version up to Microsoft 365);
+  its Save as PDF keeps only 7-65% of words readable in 10 Indian scripts and also garbles Khmer, Myanmar, Lao and Divehi
+  (about 15 scripts, over a billion speakers), while Arabic, Hebrew and Thai survive
 - **Recovery without OCR:** reversing font shaping recovered **99.1%** of words on held-out PDFs in 10 scripts, vs 86-91%
   for free OCR and 61% for the AI OCR the dataset used, at 14 ms per page on a laptop
 
-[Report](https://github.com/novain-shibu/finepdfs-audit/blob/main/REPORT.md) · [Code & results](https://github.com/novain-shibu/finepdfs-audit) · report CC BY 4.0, code Apache-2.0
+[Report](https://github.com/novain-shibu/finepdfs-audit/blob/main/REPORT.md) · [Code & results](https://github.com/novain-shibu/finepdfs-audit) · [Reported to Hugging Face](https://github.com/huggingface/finepdfs/issues/4) · report CC BY 4.0, code Apache-2.0
 
 <a name="unshape"></a>
 ### Unshape: Malayalam text from PDFs by reversing font shaping &nbsp;[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23418945.svg)](https://doi.org/10.5281/zenodo.23418945)
