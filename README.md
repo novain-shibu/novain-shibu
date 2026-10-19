@@ -147,7 +147,7 @@ keeps a stretch only if it re-renders exactly. When the embedded font has lost i
 matches the glyphs to the original font the user supplies.
 
 - Word 365 PDFs in 10 Indian scripts + Sinhala: **99.4% exact words** (first frozen run, 7123/7164)
-- Blind real PDFs from one publisher: **98.5%** (PyMuPDF 72.4%); every test is listed in the README, including two failed blind tests
+- Blind real PDFs from one publisher: **98.5%** (PyMuPDF 72.4%); every blind test is listed in the README
 - Honest limits: needs the original font; Mangal (the most common Word Hindi font) not tested yet; no scans
 
 [README](https://github.com/novain-shibu/unshape) · [v0.2.0 release](https://github.com/novain-shibu/unshape/releases/tag/v0.2.0) · AGPL-3.0 or commercial licence ([open for talks](https://github.com/novain-shibu/unshape/blob/main/COMMERCIAL.md))
