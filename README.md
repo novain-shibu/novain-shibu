@@ -28,7 +28,7 @@
 | Project | What it is | Key result | |
 |---|---|---|---|
 | **FinePDFs audit** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23432200.svg)](https://doi.org/10.5281/zenodo.23432200) | Audit of Hugging Face's FinePDFs AI training dataset, traced back to the PDFs | ~11B tokens of bad text, rough extrapolation (AI OCR invented ~4.8B in 7 Indian and Sri Lankan scripts; ~6B broken Persian filed under small languages); 94% of 791 sampled Indian government regional-language PDFs have no correct text (scans or garbled); in a controlled test, Word 365's Save as PDF garbled ~15 scripts (same text and font: Edge loses no letters, Word loses/garbles many: letter F1 97-99.5% vs 34-90%); recovery without OCR: 99% exact words | [details ↓](#finepdfs-audit) |
-| **Unshape** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23418945.svg)](https://doi.org/10.5281/zenodo.23418945) | Malayalam text from PDFs by reversing font shaping | 99% exact words vs 93% for free OCR (when the font version is known) | [details ↓](#unshape) |
+| **Unshape** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23418945.svg)](https://doi.org/10.5281/zenodo.23418945) | Exact text from broken Indian-language PDFs, no OCR: 10 Indian scripts + Sinhala (v0.2.0) | 99.4% exact words on Word 365 PDFs; 98.5% on blind real PDFs from one publisher (PyMuPDF 72.4%) | [details ↓](#unshape) |
 | **spectrace** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23413796.svg)](https://doi.org/10.5281/zenodo.23413796) | Predicting speculative-decoding gains without running the drafter | Matched real engines within 0.02–0.31% | [details ↓](#spectrace) |
 | **resync-apply** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23393220.svg)](https://doi.org/10.5281/zenodo.23393220) | Lossless copy drafting for AI code editors | 1.29× fewer model passes than Snowflake's SuffixDecoding | [details ↓](#resync-apply) |
 | **prompt-injection-relocation** | Stress test for AI-agent prompt-injection defenses | A gate that stopped 88% of attacks dropped to 28–62% when attacks moved channel | [details ↓](#prompt-injection) |
@@ -139,17 +139,18 @@ complex-script languages and traced every problem back to the original PDFs.
 [Report](https://github.com/novain-shibu/finepdfs-audit/blob/main/REPORT.md) · [Code & results](https://github.com/novain-shibu/finepdfs-audit) · [Reported to Hugging Face](https://github.com/huggingface/finepdfs/issues/4) · report CC BY 4.0, code Apache-2.0
 
 <a name="unshape"></a>
-### Unshape: Malayalam text from PDFs by reversing font shaping &nbsp;[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23418945.svg)](https://doi.org/10.5281/zenodo.23418945)
+### Unshape: exact text from broken Indian-language PDFs, without OCR &nbsp;[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23418945.svg)](https://doi.org/10.5281/zenodo.23418945)
 
-Copying Malayalam text out of a PDF often gives garbled words, because the file stores shaped glyphs, not letters. I recover
-the text by identifying the exact font version and searching for the text whose font shaping reproduces the PDF's glyphs,
-keeping a word only if it re-renders exactly.
+Copy-paste, search, screen readers and AI pipelines often get garbled text from Hindi and other Indian-language PDFs. Unshape
+recovers the text from the glyphs themselves: it searches for the text whose font shaping reproduces the PDF's glyphs and
+keeps a stretch only if it re-renders exactly. When the embedded font has lost its shaping tables (Word exports), it
+matches the glyphs to the original font the user supplies.
 
-- On PDFs with known text: **99.1–99.5% exact words**, vs 92.9–93.9% for free OCR (Tesseract) and 34–81% for PyMuPDF
-- On 10 public Kerala Gazette PDFs: **94.8%** of Malayalam words re-render exactly; PyMuPDF's output contained 25–43% of them
-- Honest limit: it needs the exact font version; on an unseen publisher it recovered 0%, and free OCR is already strong
+- Word 365 PDFs in 10 Indian scripts + Sinhala: **99.4% exact words** (first frozen run, 7123/7164)
+- Blind real PDFs from one publisher: **98.5%** (PyMuPDF 72.4%); every test is listed in the README, including two failed blind tests
+- Honest limits: needs the original font; Mangal (the most common Word Hindi font) not tested yet; no scans
 
-[Report](https://github.com/novain-shibu/unshape/blob/main/REPORT.md) · [Code](https://github.com/novain-shibu/unshape) · Apache-2.0
+[README](https://github.com/novain-shibu/unshape) · [v0.2.0 release](https://github.com/novain-shibu/unshape/releases/tag/v0.2.0) · AGPL-3.0 or commercial licence ([open for talks](https://github.com/novain-shibu/unshape/blob/main/COMMERCIAL.md))
 
 <a name="resync-apply"></a>
 ### Resync-and-Anchor Copy Drafting for Lossless Code Fast-Apply &nbsp;[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23393220.svg)](https://doi.org/10.5281/zenodo.23393220)
