@@ -27,6 +27,7 @@
 
 | Project | What it is | Key result | |
 |---|---|---|---|
+| **SeenRead** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23471690.svg)](https://doi.org/10.5281/zenodo.23471690) | Proves, word by word and without OCR, whether the text an AI or search engine extracts from a PDF is the text a human sees (font-remap lies, hidden text, garbled Indian-language text) | Fresh blind tests: 99.98% of words exact, 0 harmful errors in the latest; beats Tesseract OCR (92-98%) in English, Hindi, Bengali, Tamil | [details ↓](#seenread) |
 | **FinePDFs audit** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23432200.svg)](https://doi.org/10.5281/zenodo.23432200) | Audit of Hugging Face's FinePDFs AI training dataset, traced back to the PDFs | ~11B tokens of bad text, rough extrapolation (AI OCR invented ~4.8B in 7 Indian and Sri Lankan scripts; ~6B broken Persian filed under small languages); 94% of 791 sampled Indian government regional-language PDFs have no correct text (scans or garbled); in a controlled test, Word 365's Save as PDF garbled ~15 scripts (same text and font: Edge loses no letters, Word loses/garbles many: letter F1 97-99.5% vs 34-90%); recovery without OCR: 99% exact words | [details ↓](#finepdfs-audit) |
 | **Unshape** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23418945.svg)](https://doi.org/10.5281/zenodo.23418945) | Exact text from broken Indian-language PDFs, no OCR: 10 Indian scripts + Sinhala (v0.2.0) | 99.4% exact words on Word 365 PDFs; 98.5% on blind real PDFs from one publisher (PyMuPDF 72.4%) | [details ↓](#unshape) |
 | **spectrace** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23413796.svg)](https://doi.org/10.5281/zenodo.23413796) | Predicting speculative-decoding gains without running the drafter | Matched real engines within 0.02–0.31% | [details ↓](#spectrace) |
@@ -113,6 +114,22 @@ Working with **Government Engineering College Idukki** on a system for managing 
 ---
 
 ## 🧪 Research details
+
+<a name="seenread"></a>
+### SeenRead: proving that the text a machine reads from a PDF is the text a human sees &nbsp;[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23471690.svg)](https://doi.org/10.5281/zenodo.23471690)
+
+PDFs can show people one text while giving machines another: a font that draws "1" where its table says "9", an edited
+text table, white or invisible text. AI pipelines, CV screeners, search engines and screen readers read the machine
+version. SeenRead identifies every glyph by its exact outline in a trusted font and accepts a text only if the shaping
+engine lays it out into the same glyphs - so for every word it proves SAME, DIFFERENT (with the visible text) or UNKNOWN,
+and lists text that machines read but humans cannot see. No OCR, no guessing; works for Indian scripts too.
+
+- Two fresh pre-registered blind tests (120 new documents each, English, Hindi, Bengali, Tamil): **99.98%** of words
+  exact; the latest with **0 harmful errors**; all hidden text found, no false alarms
+- Same files with Tesseract OCR: 91.8-98.2% of words; an OCR-based lie detector caught 79-95% of lies with up to 4% false alarms
+- Honest limits: synthetic documents so far; needs the trusted fonts; real-world PDFs are the next test
+
+[README](https://github.com/novain-shibu/seenread) · [v0.1.0 release](https://github.com/novain-shibu/seenread/releases/tag/v0.1.0) · AGPL-3.0 or commercial licence ([open for talks](https://github.com/novain-shibu/seenread/blob/main/COMMERCIAL.md))
 
 <a name="finepdfs-audit"></a>
 ### FinePDFs audit: invented and broken text in an AI training dataset, government PDFs without correct text, and Word's PDF export &nbsp;[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23432200.svg)](https://doi.org/10.5281/zenodo.23432200)
