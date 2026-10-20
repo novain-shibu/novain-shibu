@@ -151,7 +151,7 @@ complex-script languages and traced every problem back to the original PDFs.
   Save as PDF loses and garbles many (letter F1 34-90%: Khmer, Myanmar, Malayalam, Hindi); Word's export keeps 7-65% of words readable in 10 Indian
   scripts and also garbles Divehi and Lao (about 15 scripts, over a billion speakers), while Arabic, Hebrew and Thai survive
 - **Recovery without OCR:** reversing font shaping recovered **99.1%** of words on held-out PDFs in 10 scripts, vs 86-91%
-  for free OCR and 61% for the AI OCR the dataset used (research version, 14 ms per page; now released as [Unshape](https://github.com/novain-shibu/unshape))
+  for free OCR and 61% for the AI OCR the dataset used (research version; now released as [Unshape](https://github.com/novain-shibu/unshape), a few seconds per page on one CPU core)
 
 [Report](https://github.com/novain-shibu/finepdfs-audit/blob/main/REPORT.md) · [Code & results](https://github.com/novain-shibu/finepdfs-audit) · [Reported to Hugging Face](https://github.com/huggingface/finepdfs/issues/4) · report CC BY 4.0, code Apache-2.0
 
