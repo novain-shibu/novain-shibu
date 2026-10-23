@@ -109,7 +109,7 @@ Working with **Government Engineering College Idukki** on a system for managing 
 | 🥇 | **1st place**, Techletics 4.0 national competition |
 | 🏅 | **Top 40 national semi-finalist**, Samsung Solve for Tomorrow 2026 |
 | 📜 | **2 provisional patents** |
-| 📄 | **Co-author, IEEE paper** (accepted, publication forthcoming) |
+| 📄 | **Co-author, IEEE paper**: *IoT-Based Resilient Monitoring Framework for Real-Time Safety of Interconnected Dams*, ICTEST 2026 · [IEEE Xplore](https://doi.org/10.1109/ICTEST69239.2026.11722793) |
 | 📰 | Featured in **Moneycontrol, The Hindu BusinessLine, EdexLive, Mathrubhumi, Manorama, Analytics India Magazine, Samsung Newsroom** and more |
 
 ---
