@@ -11,8 +11,9 @@
 </p>
 
 <p align="center">
+  📄 <a href="https://doi.org/10.1109/ICTEST69239.2026.11722793"><b>IEEE paper published in IEEE Xplore</b></a> (co-author, ICTEST 2026)<br>
   🏆 National Champion, Techletics 4.0 &nbsp;·&nbsp; 🏅 Samsung Solve for Tomorrow 2026, Top 40<br>
-  📜 2 provisional patents &nbsp;·&nbsp; 📄 IEEE co-author<br>
+  📜 2 provisional patents<br>
   🧪 <a href="#research"><b>4 published research notes with DOIs</b></a>
 </p>
 
