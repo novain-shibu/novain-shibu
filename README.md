@@ -153,7 +153,8 @@ complex-script languages and traced every problem back to the original PDFs.
   6% clean), checked on 29 originals; no improvement between 2017-19 and 2023-25. A sample of what Common Crawl and FinePDFs kept
 - **A cause, a Word bug:** with the same text and the same font, Microsoft Edge's PDF loses no letters (a few doubled vowel signs) while Word 365's
   Save as PDF loses and garbles many (letter F1 34-90%: Khmer, Myanmar, Malayalam, Hindi); Word's export keeps 7-65% of words readable in 10 Indian
-  scripts and also garbles Divehi and Lao (about 15 scripts, over a billion speakers), while Arabic, Hebrew and Thai survive
+  scripts and also garbles Divehi and Lao (about 15 scripts, over a billion speakers), while Arabic, Hebrew and Thai survive (measured on Word build 16.0.20430, 2026-10-17; build 16.0.20527 keeps these letters
+  intact except Divehi, while the NVDA screen reader in Chrome still reads about 1 word in 3 wrong; details in finepdfs-audit)
 - **Recovery without OCR:** reversing font shaping recovered **99.1%** of words on held-out PDFs in 10 scripts, vs 86-91%
   for free OCR and 61% for the AI OCR the dataset used (research version; now released as [Unshape](https://github.com/novain-shibu/unshape), a few seconds per page on one CPU core)
 
