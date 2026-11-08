@@ -8,6 +8,7 @@
 <p align="center">
   <a href="https://www.linkedin.com/in/novain-shibu"><img src="https://img.shields.io/badge/LinkedIn-novain--shibu-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
   <a href="https://scholar.google.com/citations?user=jC6KrxIAAAAJ"><img src="https://img.shields.io/badge/Google_Scholar-Novain_Shibu-4285F4?style=for-the-badge&logo=googlescholar&logoColor=white" alt="Google Scholar"></a>
+  <a href="https://orcid.org/0009-0001-5143-6088"><img src="https://img.shields.io/badge/ORCID-0009--0001--5143--6088-A6CE39?style=for-the-badge&logo=orcid&logoColor=white" alt="ORCID"></a>
   <img src="https://img.shields.io/badge/Open_to-internships_%26_collaborations-2ea44f?style=for-the-badge" alt="Open to internships and collaborations">
 </p>
 
@@ -244,5 +245,5 @@ against real engines, and applied it to choosing drafters during RL training.
 <p align="center">
   <b>Open to internships and collaborations</b> in AI infrastructure, performance engineering and embedded/IoT,<br>
   and to being told I'm wrong about something.<br><br>
-  <a href="https://www.linkedin.com/in/novain-shibu">LinkedIn</a> · <a href="https://scholar.google.com/citations?user=jC6KrxIAAAAJ">Google Scholar</a> · Student: Computer Science with Physics, Chemistry and Maths
+  <a href="https://www.linkedin.com/in/novain-shibu">LinkedIn</a> · <a href="https://scholar.google.com/citations?user=jC6KrxIAAAAJ">Google Scholar</a> · <a href="https://orcid.org/0009-0001-5143-6088">ORCID</a> · Student: Computer Science with Physics, Chemistry and Maths
 </p>
