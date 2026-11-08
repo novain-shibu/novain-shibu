@@ -27,11 +27,27 @@
 <a name="research"></a>
 ## 🧪 Research
 
+### 1. Broken text in Indian-language PDFs: found it, measured it, built the fix
+
+Many PDFs in Indian scripts look right on screen, but the text that search engines, screen readers and AI
+training pipelines read from them is garbled. I traced the problem, measured how big it is, and built the three tools
+that catch it, repair it and prove the repair, all without OCR.
+
+| Step | Project | Key result | |
+|:-:|---|---|---|
+| **① Found** | **FinePDFs audit** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23432200.svg)](https://doi.org/10.5281/zenodo.23432200)<br><sub>Hugging Face's FinePDFs AI training dataset, traced back to the PDFs</sub> | ~11B tokens of bad text, rough extrapolation (AI OCR invented ~4.8B in 7 Indian and Sri Lankan scripts; ~6B broken Persian filed under small languages); 94% of 791 sampled Indian government regional-language PDFs have no correct text (scans or garbled); in a controlled test, Word 365's Save as PDF garbled ~15 scripts (letter F1 97-99.5% for Edge vs 34-90% for Word, same text and font) | [details ↓](#finepdfs-audit) |
+| **② Detect** | **indic-pdf-check** · `pip install indic-pdf-check`<br><sub>Is this PDF's text broken? Answers in a second, on your own computer</sub> | Word 365 PDFs with known-broken text in 14 scripts: 12 flagged | [repo](https://github.com/novain-shibu/indic-pdf-check) |
+| **③ Recover** | **Unshape** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23418945.svg)](https://doi.org/10.5281/zenodo.23418945) · `pip install unshape`<br><sub>Exact text from broken PDFs, no OCR: 10 Indian scripts + Sinhala</sub> | 99.4% exact words on Word 365 PDFs; 98.5% on blind real PDFs from one publisher (PyMuPDF 72.4%) | [details ↓](#unshape) |
+| **④ Prove** | **SeenRead** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23471690.svg)](https://doi.org/10.5281/zenodo.23471690) · `pip install seenread`<br><sub>Proves, word by word, whether extracted text is the text a human sees (also catches font-remap tricks and hidden text)</sub> | Fresh blind tests: 99.98% of words exact, 0 harmful errors in the latest; beats Tesseract OCR (92-98%) in English, Hindi, Bengali, Tamil | [details ↓](#seenread) |
+
+```bash
+pip install indic-pdf-check unshape seenread   # detect -> recover -> prove
+```
+
+### 2. Faster and safer LLM systems
+
 | Project | What it is | Key result | |
 |---|---|---|---|
-| **SeenRead** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23471690.svg)](https://doi.org/10.5281/zenodo.23471690) | Proves, word by word and without OCR, whether the text an AI or search engine extracts from a PDF is the text a human sees (font-remap lies, hidden text, garbled Indian-language text) | Fresh blind tests: 99.98% of words exact, 0 harmful errors in the latest; beats Tesseract OCR (92-98%) in English, Hindi, Bengali, Tamil | [details ↓](#seenread) |
-| **FinePDFs audit** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23432200.svg)](https://doi.org/10.5281/zenodo.23432200) | Audit of Hugging Face's FinePDFs AI training dataset, traced back to the PDFs | ~11B tokens of bad text, rough extrapolation (AI OCR invented ~4.8B in 7 Indian and Sri Lankan scripts; ~6B broken Persian filed under small languages); 94% of 791 sampled Indian government regional-language PDFs have no correct text (scans or garbled); in a controlled test, Word 365's Save as PDF garbled ~15 scripts (same text and font: Edge loses no letters, Word loses/garbles many: letter F1 97-99.5% vs 34-90%); recovery without OCR: 99% exact words | [details ↓](#finepdfs-audit) |
-| **Unshape** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23418945.svg)](https://doi.org/10.5281/zenodo.23418945) | Exact text from broken Indian-language PDFs, no OCR: 10 Indian scripts + Sinhala (v0.2.0) | 99.4% exact words on Word 365 PDFs; 98.5% on blind real PDFs from one publisher (PyMuPDF 72.4%) | [details ↓](#unshape) |
 | **spectrace** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23413796.svg)](https://doi.org/10.5281/zenodo.23413796) | Predicting speculative-decoding gains without running the drafter | Matched real engines within 0.02–0.31% | [details ↓](#spectrace) |
 | **resync-apply** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23393220.svg)](https://doi.org/10.5281/zenodo.23393220) | Lossless copy drafting for AI code editors | 1.29× fewer model passes than Snowflake's SuffixDecoding | [details ↓](#resync-apply) |
 | **prompt-injection-relocation** | Stress test for AI-agent prompt-injection defenses | A gate that stopped 88% of attacks dropped to 28–62% when attacks moved channel | [details ↓](#prompt-injection) |
