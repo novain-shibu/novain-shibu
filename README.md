@@ -16,7 +16,7 @@
   📄 <a href="https://doi.org/10.1109/ICTEST69239.2026.11722793"><b>IEEE paper published in IEEE Xplore</b></a> (co-author, ICTEST 2026)<br>
   🏆 National Champion, Techletics 4.0 &nbsp;·&nbsp; 🏅 Samsung Solve for Tomorrow 2026, Top 40<br>
   📜 2 provisional patents<br>
-  🧪 <a href="#research"><b>5 published research notes with DOIs</b></a>
+  🧪 <a href="#research"><b>6 published research notes with DOIs</b></a>
 </p>
 
 <p align="center">
@@ -49,6 +49,7 @@ pip install indic-pdf-check unshape seenread   # detect -> recover -> prove
 
 | Project | What it is | Key result | |
 |---|---|---|---|
+| **exact-llm** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24137508.svg)](https://doi.org/10.5281/zenodo.24137508) | Bit-exact LLM inference: the same output bits on any machine, so anyone can re-check an AI provider's answer | Same bits on CPU and GPU from 0.5B to 7B, within 0.15% (0.5B/1.5B) and 0.41% (7B) of float perplexity; batch-1 decoding at 1.04–1.26× the speed of an equally optimised float16 version on a T4 | [details ↓](#exact-llm) |
 | **spectrace** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23413796.svg)](https://doi.org/10.5281/zenodo.23413796) | Predicting speculative-decoding gains without running the drafter | Matched real engines within 0.02–0.31% | [details ↓](#spectrace) |
 | **resync-apply** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23393220.svg)](https://doi.org/10.5281/zenodo.23393220) | Lossless copy drafting for AI code editors | 1.29× fewer model passes than Snowflake's SuffixDecoding | [details ↓](#resync-apply) |
 | **prompt-injection-relocation** | Stress test for AI-agent prompt-injection defenses | A gate that stopped 88% of attacks dropped to 28–62% when attacks moved channel | [details ↓](#prompt-injection) |
@@ -138,6 +139,24 @@ Working with **Government Engineering College Idukki** on a system for managing 
 ---
 
 ## 🧪 Research details
+
+<a name="exact-llm"></a>
+### exact-llm: bit-exact LLM inference that is also fast &nbsp;[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24137508.svg)](https://doi.org/10.5281/zenodo.24137508)
+
+Float arithmetic gives different low-order bits on different hardware, so two honest AI servers return different numbers for the
+same request, and nobody can re-check what a provider computed. exact-llm defines the model as an integer program (int8 weights,
+integer activations, exact integer sums, integer tables), so every conforming implementation returns the same bits.
+
+- Same output hashes on x86 CPUs and an NVIDIA T4 (float64 and int8 tensor cores), for Qwen2.5 0.5B, 1.5B and 7B
+- Perplexity vs float32: +0.14% / −0.07% (0.5B / 1.5B, group-128 weights), +0.41% at 7B
+- Batch-1 decoding on a T4, both sides compiled and CUDA-graphed in the same harness: 1.04× (0.5B) and 1.06–1.26× (1.5B) the speed of
+  float16; exact 7B at 19.3 tok/s, where float16 7B does not fit in memory
+- Built on exactness: a provider that quietly cuts one layer to 7 bits is caught on the first request; sampled text comes with
+  receipts anyone can replay; one spot-check of a 7B answer takes about a second on a CPU
+- Honest limits: prompt processing (prefill) is still 3–5× slower than float16; one GPU type; no comparison with vLLM / TensorRT-LLM yet.
+  Builds on and credits concurrent work (tritify, samebit, bitexact-llm, int-llm, and others)
+
+[README](https://github.com/novain-shibu/exact-llm) · [v0.4.0 release](https://github.com/novain-shibu/exact-llm/releases/tag/v0.4.0) · Apache-2.0
 
 <a name="seenread"></a>
 ### SeenRead: proving that the text a machine reads from a PDF is the text a human sees &nbsp;[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23471690.svg)](https://doi.org/10.5281/zenodo.23471690)
